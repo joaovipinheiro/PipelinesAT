@@ -1,0 +1,1 @@
+[![Java Build](https://github.com/joaovipinheiro/PipelinesAT/actions/workflows/maven-ci.yml/badge.svg)](https://github.com/joaovipinheiro/PipelinesAT/actions/workflows/maven-ci.yml)
