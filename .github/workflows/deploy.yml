@@ -1,0 +1,43 @@
+name: Deploy Completo (Assessement)
+
+on:
+  push:
+    branches: [ "main" ] # Dispara apenas na branch main
+
+jobs:
+  # Job de Desenvolvimento
+  deploy-dev:
+    runs-on: ubuntu-latest
+    environment: development # Define o ambiente (opcional, mas boa prática)
+    env:
+      AMBIENTE: "DEV" # Variável específica deste job
+    steps:
+      - name: Simular Deploy em DEV
+        run: |
+          echo "Iniciando deploy no ambiente: $AMBIENTE"
+          echo "Usando credencial segura: ${{ secrets.API_KEY }}" 
+          echo "Deploy em DEV concluído com sucesso."
+
+  # Job de Staging (Roda depois do dev)
+  deploy-staging:
+    needs: deploy-dev # Só roda se o dev passar
+    runs-on: ubuntu-latest
+    env:
+      AMBIENTE: "STAGING"
+    steps:
+      - name: Simular Deploy em STAGING
+        run: |
+          echo "Iniciando deploy no ambiente: $AMBIENTE"
+          echo "Deploy em STAGING concluído."
+
+  # Job de Produção (Roda depois do staging)
+  deploy-prod:
+    needs: deploy-staging # Só roda se o staging passar
+    runs-on: ubuntu-latest
+    env:
+      AMBIENTE: "PROD"
+    steps:
+      - name: Simular Deploy em PROD
+        run: |
+          echo "⚠️ ATENÇÃO: Iniciando deploy crítico em $AMBIENTE"
+          echo "Deploy em PRODUÇÃO finalizado!"
