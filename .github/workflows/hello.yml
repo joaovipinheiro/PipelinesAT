@@ -1,0 +1,9 @@
+name: Hello Workflow
+on: [push] # Dispara em qualquer push
+
+jobs:
+  hello-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dizer Oi
+        run: echo "Hello CI/CD"

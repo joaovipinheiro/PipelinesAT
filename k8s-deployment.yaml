@@ -1,0 +1,36 @@
+# --- Configuração do DEPLOYMENT (Gerencia as réplicas) ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calc-deployment
+spec:
+  replicas: 2  # Requisito: Pelo menos 2 réplicas
+  selector:
+    matchLabels:
+      app: calc-app
+  template:
+    metadata:
+      labels:
+        app: calc-app
+    spec:
+      containers:
+        - name: calc-container
+          image: jaovito1231231/pipelinesat:v1 # Sua imagem criada na Etapa 1
+          ports:
+            - containerPort: 8080 # A porta que seu Java usa
+
+---
+
+# --- Configuração do SERVICE (Rede/Acesso) ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: calc-service
+spec:
+  selector:
+    app: calc-app # Conecta este serviço aos Pods do Deployment acima
+  ports:
+    - protocol: TCP
+      port: 80      # Porta externa (vamos acessar localhost:80)
+      targetPort: 8080 # Porta interna do container
+  type: LoadBalancer # Permite acesso externo (localhost)

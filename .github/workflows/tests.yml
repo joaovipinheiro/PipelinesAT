@@ -1,0 +1,10 @@
+name: Tests Workflow
+on: [pull_request] # Dispara apenas quando abrir um PR
+
+jobs:
+  test-job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3 # Baixa o código
+      - name: Executar Testes
+        run: echo "Rodando testes"
