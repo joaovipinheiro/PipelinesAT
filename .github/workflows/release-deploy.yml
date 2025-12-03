@@ -1,0 +1,11 @@
+name: Release Deploy
+on:
+  release:
+    types: [published] # Só roda quando você publica uma release no GitHub
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Simular Deploy
+        run: echo "Deploy realizado com sucesso"
